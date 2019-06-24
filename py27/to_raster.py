@@ -17,6 +17,8 @@ def raster2array(rasterfn):
     '''
     raster = gdal.Open(rasterfn)
     geotransform = raster.GetGeoTransform()
+    # print geotransform
+    # exit()
     originX = geotransform[0]
     originY = geotransform[3]
     pixelWidth = geotransform[1]
@@ -38,18 +40,18 @@ def array2raster(newRasterfn,longitude_start,latitude_start,pixelWidth,pixelHeig
     driver = gdal.GetDriverByName('GTiff')
     if os.path.exists(newRasterfn):
         os.remove(newRasterfn)
-    outRaster = driver.Create(newRasterfn, cols, rows, 1, gdal.GDT_Float32)
+    outRaster = driver.Create(newRasterfn, cols, rows, 1, gdal.GDT_Byte)
     # Add Color Table
     # outRaster.GetRasterBand(1).SetRasterColorTable(ct)
     outRaster.SetGeoTransform((originX, pixelWidth, 0, originY, 0, pixelHeight))
     # Write Date to geotiff
     outband = outRaster.GetRasterBand(1)
-    ndv = -999999
+    ndv = 0
     outband.SetNoDataValue(ndv)
     outband.WriteArray(array)
-    outRasterSRS = osr.SpatialReference()
-    outRasterSRS.ImportFromEPSG(4326)
-    outRaster.SetProjection(outRasterSRS.ExportToWkt())
+    # outRasterSRS = osr.SpatialReference()
+    # outRasterSRS.ImportFromEPSG(4326)
+    # outRaster.SetProjection(outRasterSRS.ExportToWkt())
     # Close Geotiff
     outband.FlushCache()
     del outRaster
