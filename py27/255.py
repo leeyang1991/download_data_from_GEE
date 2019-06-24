@@ -11,8 +11,8 @@ import time
 
 this_root = os.getcwd()+'\\..\\'
 
-fdir = this_root+'MRT_resample\\'
-save_dir = this_root+'MRT_resample_trans\\'
+fdir = r'F:\FVC内蒙古植被覆盖数据\1km月值_1978_1985_1995_2005_2018\\'
+save_dir = r'F:\FVC内蒙古植被覆盖数据\1km_monthly\\'
 flist = os.listdir(fdir)
 
 
@@ -21,7 +21,10 @@ time_init = time.time()
 flag = 0
 for f in flist:
     time_start = time.time()
-    #print(f)
+    if not f.endswith('.tif'):
+        continue
+    print(f)
+    exit()
     array, originX, originY, pixelWidth, pixelHeight = to_raster.raster2array(fdir+f)
     new = array/255.
     # plt.imshow(new)
