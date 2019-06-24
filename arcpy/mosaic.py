@@ -63,16 +63,22 @@ def max_fvc(rasters,out_max_raster):
 
 
 def max_composite():
-    raster_dir = r'E:\190604\006_mosaic_0_100\2005\\'
-    out_max_tif = r'E:\190604\006_mosaic_0_100\\2005_max.tif'
+    raster_dir = 'F:\\FVC内蒙古植被覆盖数据\\30m月值_1978_1985_1995_2005_2018_Tif\\'
+    out_max_dir = 'F:\\FVC内蒙古植被覆盖数据\\liyang_temp\\'
     rasters_list = os.listdir(raster_dir)
-    rasters = []
-    for i in rasters_list:
-        if i.endswith('tif'):
-            print(i)
-            rasters.append(raster_dir + i)
-    print('calculating')
-    max_fvc(rasters,out_max_tif)
+
+    max_compose_list = ['LT05_1978','LT05_1985','LT05_1995','LT05_2005','LC08_2018']
+    for mc in max_compose_list:
+        print mc
+        out_max_tif = out_max_dir+mc+'.tif'
+        rasters = []
+        for i in rasters_list:
+            if mc in i:
+                if i.endswith('tif'):
+                    print(raster_dir + i).decode('gbk')
+                    rasters.append((raster_dir + i).decode('gbk').encode('utf-8'))
+        print('calculating')
+        max_fvc(rasters,out_max_tif)
 
 
 def mosaic_2018():
@@ -103,7 +109,7 @@ def mosaic_2018():
 
 
 def main():
-    mosaic_2018()
+    max_composite()
 
 
 if __name__ == '__main__':
