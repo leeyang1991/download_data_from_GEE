@@ -46,7 +46,7 @@ def array2raster(newRasterfn,longitude_start,latitude_start,pixelWidth,pixelHeig
     outRaster.SetGeoTransform((originX, pixelWidth, 0, originY, 0, pixelHeight))
     # Write Date to geotiff
     outband = outRaster.GetRasterBand(1)
-    ndv = 0
+    ndv = 255
     outband.SetNoDataValue(ndv)
     outband.WriteArray(array)
     # outRasterSRS = osr.SpatialReference()
