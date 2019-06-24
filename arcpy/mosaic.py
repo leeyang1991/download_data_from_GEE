@@ -63,11 +63,12 @@ def max_fvc(rasters,out_max_raster):
 
 
 def max_composite():
-    raster_dir = 'F:\\FVC内蒙古植被覆盖数据\\30m月值_1978_1985_1995_2005_2018_Tif\\'
-    out_max_dir = 'F:\\FVC内蒙古植被覆盖数据\\liyang_temp\\'
+    raster_dir = r'F:\FVC内蒙古植被覆盖数据\1km_monthly\\'
+    out_max_dir = r'F:\\FVC内蒙古植被覆盖数据\\1km_max\\'
     rasters_list = os.listdir(raster_dir)
 
-    max_compose_list = ['LT05_1978','LT05_1985','LT05_1995','LT05_2005','LC08_2018']
+    # max_compose_list = ['LT05_1978','LT05_1985','LT05_1995','LT05_2005','LC08_2018']
+    max_compose_list = ['CDR_1978','CDR_1985','CDR_1995','GLASS_2005','MCD43A4']
     for mc in max_compose_list:
         print mc
         out_max_tif = out_max_dir+mc+'.tif'
